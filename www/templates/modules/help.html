@@ -1,0 +1,13 @@
+<ion-header-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+    <cs-return-btn></cs-return-btn>
+    <label class="title">帮助</label>
+</ion-header-bar>
+<ion-content class="stable-bg has-header">
+    <ion-slide-box does-continue="true" class="ss-slide-box">
+        <ion-slide ng-repeat="imgageItem in helpImgageItems">
+            <div class="text-center" style="padding-top: 10px;height: 500px">
+                <img ng-src="{{imgageItem.src}}">
+            </div>
+        </ion-slide>
+    </ion-slide-box>
+</ion-content>

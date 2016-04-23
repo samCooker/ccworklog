@@ -8,6 +8,7 @@
         .controller('worklogEditController',WorklogEditController)
         .controller('worklogSettingController',WorklogSettingController)
         .controller('worklogFavoritePrjController',WorklogFavoritePrjController)
+        .controller('worklogHelpController',WorklogHelpController)
     ;
 
     /**
@@ -20,7 +21,8 @@
         $scope.worklogLogin=worklogLoginFun;//登录日志系统
         $scope.worklogLogout=worklogLogoutFun;//登出日志系统
         $scope.exitApp=exitAppFun;//退出app
-        $scope.toSettingPage=toSettingPage;//跳转至常用设置
+        $scope.toSettingPage=toSettingPageFun;//跳转至常用设置
+        $scope.toHelpPage=toHelpPageFun;
         $scope.userSetting={};
 
         // 创建一个登录对话框
@@ -88,13 +90,17 @@
         }
 
         //跳转至常用设置
-        function toSettingPage() {
+        function toSettingPageFun() {
             dbTool.getWorklogSetting().then(function (data) {
-                $scope.userSetting.projectsData=data.projectsData;
+                $scope.userSetting.projectsData=data.projectsData||{};
                 $state.go("worklog.setting");
             }).catch(function (error) {
                 tipMsg.showMsg(error);
             });
+        }
+
+        function toHelpPageFun() {
+            $state.go("help");
         }
 
     }
@@ -102,18 +108,19 @@
     /**
      * 工作日志列表控制器
      * */
-    function WorklogListController($scope,$rootScope,$filter,$state,commonHttp,tipMsg,tools,dbTool) {
+    function WorklogListController($scope,$rootScope,$filter,$state,$ionicActionSheet,commonHttp,tipMsg,tools,dbTool) {
         $scope.chooseWorkDate=chooseWorkDateFun;//选择一个日期新增日志
         $scope.isLoadEnd=false;//是否已经加载完成
         $scope.doRefresh=doRefreshFun;//刷新
         $scope.loadMore=loadMoreFun;//加载更多
+        $scope.editItem=editItemFun;//编辑
+        $scope.detailItem=detailItemFun;//详情
         $scope.deleteItem=deleteItemFun;//删除
         $scope.worklogList=[];
         $scope.submitData={};
         $scope.searchData={};
         var limitDate=new Date('2016-02-01');
 
-        $scope.editItem=editItemFun;//编辑
 
         //接收刷新列表的广播
         $rootScope.$on('worklog.refreshworklog', function (event,data) {
@@ -330,6 +337,37 @@
             });
         }
 
+        //详情
+        function detailItemFun(worklog) {
+            //tipMsg.alertMsg('<div class="text-center">'+worklog.date+'</div>'+worklog.item,'详情');
+            worklog.isSelect=true;
+            $ionicActionSheet.show({
+                buttons: [
+                    { text:'<b class="text-center">编辑</b>'},
+                    { text:'<b class="text-center">删除</b>'}
+                ],
+                cancelText: '取消',
+                cancel: function() {
+                    worklog.isSelect=false;
+                },
+                titleText: '<div class="text-center">'+worklog.date+' 工作详情'+'</div>'+'<p class="text-left">'+worklog.item+'</p>',
+                buttonClicked: function(index) {
+                    switch(index){
+                        case 0:
+                            editItemFun(worklog);
+                            break;
+                        case 1:
+                            deleteItemFun(worklog);
+                            break;
+                        default :
+                            console.log(index);
+                    }
+                    worklog.isSelect=false;
+                    return true;
+                }
+            });
+        }
+
         //删除日志
         function deleteItemFun(item) {
             tipMsg.confirm().then(function (res) {
@@ -360,7 +398,7 @@
      * 工作日志填写编辑控制器
      * @constructor
      */
-    function WorklogEditController($scope,$ionicHistory,$ionicActionSheet,$rootScope,$filter,$state,tipMsg,commonHttp,dbTool) {
+    function WorklogEditController($scope,$ionicHistory,$rootScope,$filter,$state,tipMsg,commonHttp,dbTool) {
         $scope.evaSelfArr={1:'一般',2:'满意',3:'非常满意',4:'不满意'};//显示评价详情
         $scope.submitWorkLog=submitWorkLogFun;// 提交日志
         $scope.submitData = commonHttp.getSubmitData();//获取日志数据
@@ -407,37 +445,7 @@
 
         $scope.selectFavoriteProject = function () {
             $state.go('worklog.favoriteprj');
-            return;
-            if(!$scope.favoriteProjects.length){
-                dbTool.getWorklogSetting().then(function (data) {
-                    for(var prjNo in data.projectsData){
-                        if (data.projectsData.hasOwnProperty(prjNo)) {
-                            $scope.favoriteProjects.push({text: '<b>'+prjNo+'</b><label>' +$filter('showOrHideFilter')(data.projectsData[prjNo],15) + '</label>', id: prjNo});
-                        }
-                    }
-                    favoritePrjActionSheet();
-                });
-            }else{
-                favoritePrjActionSheet();
-            }
-
         };
-
-        function favoritePrjActionSheet() {
-            if($scope.favoriteProjects.length){
-                var hideSheet = $ionicActionSheet.show({
-                    buttons: $scope.favoriteProjects,
-                    titleText: '选择常用项目',
-                    cssClass:'ss-action-sheet',
-                    buttonClicked: function(index) {
-                        console.log(index);
-                        return true;
-                    }
-                });
-            }else{
-                tipMsg.showMsg('没有可选的常用项目，请在常用设置里选择。');
-            }
-        }
 
         //选择项目完成
         $rootScope.$on('project.select.bringback',function(event,data){
@@ -452,9 +460,7 @@
      */
     function WorklogFavoritePrjController($scope,$state,$rootScope,$ionicHistory,dbTool) {
 
-        dbTool.getWorklogSetting().then(function (data) {
-            $scope.projectsSelfData=data.projectsData;
-        });
+        getWorklogSetting();
 
         //选择项目完成
         $scope.chooseProject= function (prjNo) {
@@ -465,6 +471,17 @@
         //添加更多常用项目
         $scope.addMoreProjects = function(){
             $state.go("worklog.setting");
+        };
+
+        $scope.doRefresh= function () {
+            getWorklogSetting();
+            $scope.$broadcast('scroll.refreshComplete');//广播下拉完成事件，否则图标不消失
+        };
+
+        function getWorklogSetting() {
+            dbTool.getWorklogSetting().then(function (data) {
+                $scope.projectsSelfData=data.projectsData;
+            });
         }
     }
 
@@ -478,7 +495,7 @@
         $scope.projectsData=[];
 
         //弹出选择项目对话框
-        $scope.selectProject = function (){
+        $scope.selectFavoriteProject = function (){
             $scope.worklogProjectsModal.show();
             $scope.doRefreshProjects();
         };
@@ -605,5 +622,18 @@
             }
             return false;
         }
+    }
+
+    /**
+     * 帮助控制器
+     */
+    function WorklogHelpController($scope) {
+        $scope.helpImgageItems=[
+            {title:'',src:'img/help/help-login.jpg'},
+            {title:'',src:'img/help/help-setting.jpg'},
+            {title:'',src:'img/help/help-setting-prj.jpg'},
+            {title:'',src:'img/help/help-add.jpg'},
+            {title:'',src:'img/help/help-add-detail.jpg'}
+        ];
     }
 })();

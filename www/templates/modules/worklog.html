@@ -22,7 +22,7 @@
                 <ion-item class="item-stable item-thumbnail-left">
                     <img src="img/d-1-1.png"/>
                     <div><br/>
-                        登录账号：{{loginData.account}}
+                        登录账号：
                         <br/>
                         登录状态：<span ng-if="isLogin" class="balanced">已登录</span><span ng-if="!isLogin" class="assertive">未登录</span>
                     </div>
@@ -34,8 +34,12 @@
                 <ion-item menu-close ng-click="worklogLogout()" class="item-stable item-icon-left item-icon-right">
                     <i class="icon ion-log-out calm"></i> 登出日志 <i class="icon list-insert ion-chevron-right"></i>
                 </ion-item>
+                <ion-item menu-close ng-click="toHelpPage()" class="item-stable item-icon-left item-icon-right">
+                    <!--menu-close点击后关闭侧边栏-->
+                    <i class="icon ion-help calm"></i> 帮助 <i class="icon list-insert ion-chevron-right"></i>
+                </ion-item>
                 <ion-item ng-click="exitApp()" class="item-stable item-icon-left item-icon-right">
-                    <i class="icon ion-log-out calm"></i> 退出系统 <i class="icon list-insert ion-chevron-right"></i>
+                    <i class="icon ion-social-android-outline calm"></i> 退出系统 <i class="icon list-insert ion-chevron-right"></i>
                 </ion-item>
             </ion-list>
         </ion-content>

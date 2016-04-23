@@ -5,7 +5,12 @@
 </ion-header-bar>
 <ion-content class="stable-bg has-header">
     <ion-list>
-        <ion-item ng-repeat="(prjId,prjName) in projectsSelfData" ng-click="chooseProject(prjId)">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新..."
+                       refreshing-text="正在刷新!"
+                       spinner="android">
+        </ion-refresher>
+        <ion-item ng-repeat="(prjId,prjName) in projectsSelfData" ng-click="chooseProject(prjId)" >
             <div >{{prjId}}&nbsp;&nbsp;&nbsp;&nbsp;{{prjName}}</div>
         </ion-item>
     </ion-list>

@@ -22,7 +22,7 @@ appModule.run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $s
 
     //物理返回按钮控制&双击退出应用
     $ionicPlatform.registerBackButtonAction(function (e) {
-        if ($location.path() == '/worklog/list') {
+        if ($location.path() == '/worklog/list'||$location.path() == '/worklog/setting') {
             //判断处于哪个页面时双击退出
             if ($rootScope.backButtonPressedOnceToExit) {
                 ionic.Platform.exitApp();//退出app

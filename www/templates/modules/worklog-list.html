@@ -17,17 +17,17 @@
                        spinner="android">
         </ion-refresher>
         <ion-list>
-            <ion-item ng-repeat="worklog in worklogList" class="item item-icon-left">
-                <i class="icon calm" ng-class="{'ion-ribbon-a':$odd,'ion-ribbon-b':$even}"></i>
+            <ion-item collection-repeat="worklog in worklogList" class="item item-icon-left" ng-click="detailItem(worklog)">
+                <i class="icon calm" ng-class="{'ion-ribbon-a':$odd,'ion-ribbon-b':$even,'balanced':worklog.isSelect}"></i>
                 <h2>&nbsp;&nbsp;{{worklog.date}}</h2>
-                <p>{{worklog.item}}</p>
-                <!--列表按钮-->
-                <ion-option-button class="button-info" ng-click="editItem(worklog)">
-                    <i class="icon ion-checkmark-round ion-compose"></i>
-                </ion-option-button>
-                <ion-option-button class="button-info" ng-click="deleteItem(worklog)">
-                    <i class="icon ion-ios-trash-outline assertive"></i>
-                </ion-option-button>
+                <p >{{worklog.item}}</p>
+                <!--列表按钮 -->
+                <!--<ion-option-button class="button-info" ng-click="editItem(worklog)">-->
+                    <!--<i class="icon ion-compose"></i>-->
+                <!--</ion-option-button>-->
+                <!--<ion-option-button class="button-info" ng-click="deleteItem(worklog)">-->
+                    <!--<i class="icon ion-ios-trash-outline assertive"></i>-->
+                <!--</ion-option-button>-->
             </ion-item>
         </ion-list>
         <!--可设置ng-if防止无限加载-->

@@ -57,6 +57,11 @@ $stateProvider
             }
         }
     })
+    .state('help',{
+        url:'/help',
+        controller:'worklogHelpController',
+        templateUrl:'templates/modules/help.html'
+    })
     ;
     $urlRouterProvider.otherwise('/worklog/list');//找不到对应url的默认设置
 });

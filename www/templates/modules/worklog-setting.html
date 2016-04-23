@@ -10,13 +10,14 @@
     <ion-content>
         <div class="list">
             <div class="card">
-                <div class="item item-divider" ng-click="selectProject()">
+                <div class="item item-divider" ng-click="selectFavoriteProject()">
                     常用项目 &nbsp;&nbsp;&nbsp;&nbsp;<i class="icon ion-edit calm" ></i>
                 </div>
-                <ion-list show-reorder="true">
-                <ion-item ng-repeat="(prjId,prjName) in userSetting.projectsData" class="item-remove-animate">
-                    {{prjId}} {{prjName}}
-                    <ion-reorder-button class="ion-minus-circled" ng-click="deleteSelectedPrj(prjId)"></ion-reorder-button>
+                <ion-list show-delete="true">
+                <ion-item ng-repeat="(prjId,prjName) in userSetting.projectsData" class="item-remove-animate item-text-wrap">
+                    <div>项目编号：{{prjId}} </div>
+                    <div>项目名称：{{prjName}}</div>
+                    <ion-delete-button class="ion-minus-circled" ng-click="deleteSelectedPrj(prjId)"></ion-delete-button>
                 </ion-item>
                 </ion-list>
             </div>
