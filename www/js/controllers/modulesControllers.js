@@ -131,7 +131,7 @@
         function doRefreshFun(){
             //获取当前周的星期一日期
             if(getFirstDayOfWeek(true)) {
-                commonHttp.workLogPost('workdaily/myDaily.do').then(function (data) {
+                commonHttp.workLogGet('workdaily/myDaily.do?day=' + $scope.searchData.day).then(function (data) {
                     if(data&&data.length) {
                         $scope.worklogList = resolveHtmlData(data);
                     }else{
@@ -156,6 +156,7 @@
                 var firstDateOfWeek=new Date(_timemill);
                 //返回 yyyy-MM-dd 格式日期
                 $scope.searchData.day = firstDateOfWeek.getFullYear() + '-' + (firstDateOfWeek.getMonth() + 1) + '-' + firstDateOfWeek.getDate();
+                console.log($scope.searchData.day);
                 return true;
             }else{
                 // 获取查询日期的上一个星期一日期
