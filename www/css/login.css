@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/*
+首页 登陆注册样式
+*/
+/*图标大小*/
+.ss-log-i-30{
+    font-size: 30px;
+}
+.ss-log-i-50{
+    font-size: 50px;
+}
+/*列表浮动图标*/
+.ss-scroll-box{
+    height: 48px;
+    width: 60px;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    z-index: 1000;
+    text-align: center;
+}
+
+.ss-scroll-box i{
+    font-size: 30px;
+    color: #11A8DE;
+}
+
+.ss-form-box{
+    margin-top: 20%;
+}
+
+.ss-text-center{
+    text-align: center;
+}
+
+.ss-text-right{
+    text-align: right;
+}
+.ss-action-sheet .button{
+    text-align: left;
+}
+
+.ss-top-15{
+    margin-top: 15%
+}
+

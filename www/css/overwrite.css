@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/*覆盖ionic原有的样式*/
+
+/*覆盖ionic的加载样式*/
+/*.loading-container .loading {*/
+    /*background-color: inherit;*/
+/*}*/
+
+/*自动换行*/
+.ss-item-p{
+    white-space: initial;
+}
+.ss-item-margin{
+    margin: 1px 15px;
+}

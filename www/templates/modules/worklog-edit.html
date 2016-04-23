@@ -1,0 +1,68 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-view view-title="工作日志填写">
+    <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+        <ion-nav-buttons side="left"><!--左边的按钮-->
+            <!--打开左侧边栏-->
+            <cs-return-btn></cs-return-btn>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <i class="icon ion-android-checkmark-circle ss-log-i-30" ng-click="submitWorkLog()">
+            </i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <!--<div class="row">-->
+                    <!--<div class="col-20 ss-text-right">日志ID:</div><div class="col-80 ss-item-margin">{{submitData.id}}</div>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-20 ss-text-right">填写日期ID:</div><div class="col-80 ss-item-margin">{{submitData.dailyId}}</div>-->
+                <!--</div>-->
+                <div class="row">
+                    <div class="col-20 ss-text-right">填写日期:</div><div class="col-80 ss-item-margin">{{submitData.workDate}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-20 ss-text-right">当前用户:</div><div class="col-80 ss-item-margin">{{loginData.account}}</div>
+                </div>
+            </label>
+            <label class="item item-icon-right">项目编号:{{submitData.prjNo}}</label>
+            <label class="item item-icon-right" ng-click="selectFavoriteProject()">项目名称:{{submitData.prjName}}<i class="icon ion-ios-list-outline calm" ></i></label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">内容:</span>
+                <textarea ng-model="submitData.content" placeholder="请填写工作内容，不少于20个字符。" rows="3"></textarea>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">用时:</span>
+                <div class="range range-positive" style=" width: 90%;">
+                    <span style="width: 80px;">{{submitData.useHours}}</span>
+                    <i class="icon ion-ios-clock-outline"></i>
+                    <input type="range" ng-model="submitData.useHours" min="0" max="5" step="0.5">
+                    <i class="icon ion-ios-clock"></i>
+                </div>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">评价:</span>
+                <div class="range range-positive" style=" width: 90%;">
+                    <span style="width: 80px;">{{evaSelfName}}</span>
+                    <i class="icon ion-android-happy"></i>
+                    <input type="range" ng-model="submitData.evaSelf" min="1" max="4" ng-change="evaSelfName=evaSelfArr[submitData.evaSelf]">
+                    <i class="icon ion-android-sad"></i>
+                </div>
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">类型:</span>
+            </label>
+            <cs-ion-radio ng-model="submitData.workType" ng-value="'1'">项目</cs-ion-radio>
+            <cs-ion-radio ng-model="submitData.workType" ng-value="'2'">学习</cs-ion-radio>
+            <cs-ion-radio ng-model="submitData.workType" ng-value="'7'">请假</cs-ion-radio>
+            <cs-ion-radio ng-model="submitData.workType" ng-value="'9'">其他</cs-ion-radio>
+            <label class="item">
+                <button class="button button-block button-positive" ng-click="submitWorkLog()">
+                    <span ng-if="submitData.id">修改</span>
+                    <span ng-if="!submitData.id">添加</span>
+                </button>
+            </label>
+        </div>
+    </ion-content>
+</ion-view>
