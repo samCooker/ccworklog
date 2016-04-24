@@ -16,8 +16,8 @@
 
   1. 安装指令: cordova plugin add io.litehelpers.cordova.sqlitestorage
   2. 在index.html中引入js<script src="lib/pouchdb/dist/pouchdb.min.js"></script>
-   API: http://pouchdb.com/api.html
-   demo: 查看homeControllers.js的FordosCtrlFun方法
+  3. API: http://pouchdb.com/api.html
+  4. demo: 查看homeControllers.js的FordosCtrlFun方法
 
   PouchDB查询插件:
   https://github.com/nolanlawson/pouchdb-find
