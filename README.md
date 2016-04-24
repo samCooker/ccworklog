@@ -5,10 +5,12 @@
 
 #部分插件说明
   1.Toast插件
+  
     cordova plugin add cordova-plugin-x-toast
     详情查看：https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin
 
   2.PouchDB 本地存储插件
+  
     PouchDB是操作SQLite数据库的javascript库
   
     SQLite是一种轻量级的嵌入式数据库（数据库不需要你安装的，手机系统自带，你需要安装的就是SQLite插件）
