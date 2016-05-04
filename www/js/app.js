@@ -13,12 +13,18 @@ appModule.run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $s
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
-            StatusBar.styleDefault();
+            //StatusBar.styleDefault();
+            StatusBar.styleBlackTranslucent();
+        }
+
+        //推送服务
+        if(window.plugins&&window.plugins.jPushPlugin) {
+            window.plugins.jPushPlugin.init();
         }
     });
 
     //初始化本地存储数据库
-    dbTool.initWebSqlDb('appDb');
+    dbTool.initWebSqlDb('ccworklogDb');
 
     //物理返回按钮控制&双击退出应用
     $ionicPlatform.registerBackButtonAction(function (e) {

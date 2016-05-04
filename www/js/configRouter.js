@@ -39,15 +39,6 @@ $stateProvider
             }
         }
     })
-    .state('worklog.favoriteprj',{
-        url:'/favoriteprj',
-        views:{
-            'worklogcontent':{
-                controller:'worklogFavoritePrjController',
-                templateUrl:'templates/modules/worklog-favorite-prj.html'
-            }
-        }
-    })
     .state('worklog.setting',{
         url:'/setting',
         views:{

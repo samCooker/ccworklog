@@ -245,6 +245,7 @@
             rmFdData: removeFdDataFun,
             getAllDocs: getAllDocsFun,
             getDb: getDbFun,
+            getFavoriteWords:getFavoriteWordsFun,
             getWorklogUser:getWorklogUserFun,
             putWorklogUser:putWorklogUserFun,
             putWorklogSetting:putWorklogSettingFun,
@@ -257,7 +258,7 @@
         var _fdId = 'fodoItem';
         var _worklogUserId = 'worklogUserId';
         var _worklogSettingId = 'worklogSettingId';
-
+        var _curUser = {};
         var _worklogId = 'worklogId';
 
         /**
@@ -273,8 +274,7 @@
                     name:'search-id-index'
                 }
             }).catch(function (err) {
-                tipMsg.showMsg('创建失败。');
-                console.log(err);
+                tipMsg.alertMsg('创建失败。'+err);
             });
         }
 
@@ -417,6 +417,7 @@
                     result.prjNo=data.prjNo;
                     result.prjName=data.prjName;
                     result.content=data.content;
+                    result.evaSelf=data.evaSelf;
                     _db.put(result);
                 }else{
                     data._id = _worklogId; //指定id
@@ -432,14 +433,22 @@
          * @returns {*}
          */
         function getWorklogDataFun() {
-            return findDataByIdFun(_worklogId,['_id','useHours', 'workType', 'prjNo', 'prjName','content']);
+            return findDataByIdFun(_worklogId,['_id','useHours', 'workType', 'prjNo', 'prjName','content','evaSelf']);
         }
 
         /**
          * 获取工作日志登陆用户信息
          */
         function getWorklogUserFun() {
-            return findDataByIdFun(_worklogUserId,['_id','account','password']);
+            if(_curUser.account){
+              var delay = $q.defer();
+              delay.resolve(_curUser);
+              return delay.promise;
+            }
+            return findDataByIdFun(_worklogUserId,['_id','account','password','pushFlag']).then(function (data) {
+              _curUser=data;
+              return data;
+            });
         }
 
         /**
@@ -448,15 +457,16 @@
         function putWorklogUserFun(data) {
             findDataByIdFun(_worklogUserId).then(function (result) {
                 if(result._id){
-                    result.account=data.account;
-                    result.password=data.password;
+                    angular.extend(result,data);
                     _db.put(result);
+                    _curUser = data;//将当前用户保存到公用的对象中，方便程序在其他地方调用
                 }else{
                     data._id = _worklogUserId; //指定id
                     _db.put(data);
                 }
             }).catch(function (error) {
                 tipMsg.showMsg(error);
+                _curUser = {};
             });
         }
 
@@ -482,7 +492,14 @@
          * 获取工作日志常用设置
          */
         function getWorklogSettingFun() {
-            return findDataByIdFun(_worklogSettingId,['_id','projectsData','evaSelf','workType']);
+            return findDataByIdFun(_worklogSettingId,['_id','projectsData','favoriteWords']);
+        }
+
+        /**
+         * 获取常用词条
+         */
+        function getFavoriteWordsFun() {
+            return findDataByIdFun(_worklogSettingId,['_id','favoriteWords']);
         }
 
         return Fac;

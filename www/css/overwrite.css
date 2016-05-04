@@ -32,3 +32,8 @@
     font-size: 16px;
     color: #007aff;
 }
+
+/*input 宽度*/
+.item-input-wrapper input{
+    width: 90%;
+}

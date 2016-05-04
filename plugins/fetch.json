@@ -47,14 +47,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "io.litehelpers.cordova.sqliteStorage": {
-        "source": {
-            "type": "registry",
-            "id": "io.litehelpers.cordova.sqlitestorage"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-x-toast": {
         "source": {
             "type": "registry",
@@ -75,6 +67,25 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-network-information"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cn.jpush.phonegap.JPushPlugin": {
+        "source": {
+            "type": "registry",
+            "id": "jpush-phonegap-plugin"
+        },
+        "is_top_level": true,
+        "variables": {
+            "API_KEY": "3c7b423687567f149ad9c627"
+        }
+    },
+    "com.phonegap.plugins.sqlite": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nolanlawson/sqlite-plugin-fork",
+            "subdir": "."
         },
         "is_top_level": true,
         "variables": {}

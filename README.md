@@ -17,6 +17,7 @@
     安装SQLite插件和pouchdb.js库，并将pouchdb引入到index.html中。
   
     1. 安装指令: cordova plugin add io.litehelpers.cordova.sqlitestorage
+                **旧版本 cordova plugin add https://github.com/nolanlawson/sqlite-plugin-fork
     2. 在index.html中引入js<script src="lib/pouchdb/dist/pouchdb.min.js"></script>
     3. API: http://pouchdb.com/api.html
   
