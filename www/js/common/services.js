@@ -274,7 +274,7 @@
                     name:'search-id-index'
                 }
             }).catch(function (err) {
-                tipMsg.alertMsg('创建失败。'+err);
+                console.log('创建失败。'+err);
             });
         }
 

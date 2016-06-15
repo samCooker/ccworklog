@@ -23,11 +23,11 @@
                     <i class="icon ion-ios-paper calm ss-log-i-20" ></i>&nbsp;&nbsp;工作内容:
                 </div>
                 <label class="item item-input item-stacked-label">
-                    <textarea ng-model="submitData.content" placeholder="请填写工作内容，不少于20个字符。" rows="3"></textarea>
+                    <textarea ng-model="submitData.content" placeholder="请填写工作内容，不少于20个字符。" rows="3" ng-focus="contentOffsetTo()"></textarea>
                 </label>
             </div>
             <div class="card">
-                <div class="item item-divider">
+                <div class="item item-divider" id="use-hour-id">
                     用时:
                 </div>
                 <div class="item item-input item-stacked-label">

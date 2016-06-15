@@ -424,7 +424,7 @@
    * 工作日志填写编辑控制器
    * @constructor
    */
-  function WorklogEditController($scope, $ionicHistory, $rootScope, $ionicModal, $state, tipMsg, commonHttp, dbTool) {
+  function WorklogEditController($scope, $ionicHistory, $rootScope, $ionicModal,$ionicScrollDelegate, $state, tipMsg, commonHttp, dbTool) {
     $scope.evaSelfArr = {1: '一般', 2: '满意', 3: '非常满意', 4: '不满意'};//显示评价详情
     $scope.submitWorkLog = submitWorkLogFun;// 提交日志
     $scope.submitData = commonHttp.getSubmitData();//获取日志数据
@@ -513,6 +513,12 @@
         tipMsg.alertMsg(error);
         $scope.$broadcast('scroll.refreshComplete');//广播下拉完成事件，否则图标不消失
       });
+    };
+
+    $scope.contentOffsetTo = function () {
+        if(window.cordova&&window.cordova.plugins.Keyboard.show){
+            $ionicScrollDelegate.scrollTo(0,50,true);
+        }
     };
 
     //-------------选择项目 end------------

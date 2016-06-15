@@ -24,3 +24,7 @@
     PouchDB查询插件:
     https://github.com/nolanlawson/pouchdb-find
     
+  3.JPush 推送
+    极光推送：https://www.jpush.cn
+    安装：cordova plugin add jpush-phonegap-plugin --variable API_KEY=your_jpush_appkey
+    
