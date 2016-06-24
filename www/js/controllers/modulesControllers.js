@@ -4,6 +4,7 @@
 (function () {
   appModule
     .controller('worklogHomeController', WorklogHomeController)
+    .controller('worklogHomeOtherController', WorklogHomeOtherController)
     .controller('worklogListController', WorklogListController)
     .controller('worklogEditController', WorklogEditController)
     .controller('worklogSettingController', WorklogSettingController)
@@ -125,6 +126,127 @@
     }
 
   }
+
+  /**
+   * 工作日志父类控制器（从其他app进入该页面，不弹出登录对话框，直接在后台登录。）
+   * @constructor
+   */
+  function WorklogHomeOtherController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool) {
+    $scope.loginData = {};
+    $scope.isLogin = false;//是否登录
+    $scope.worklogLogin = worklogLoginFun;//登录日志系统
+    $scope.worklogLogout = worklogLogoutFun;//登出日志系统
+    $scope.exitApp = exitAppFun;//退出app
+    $scope.toSettingPage = toSettingPageFun;//跳转至常用设置
+    $scope.toHelpPage = toHelpPageFun;
+    $scope.userSetting = {};//用户设置信息
+
+    // 创建一个登录对话框
+    $ionicModal.fromTemplateUrl('templates/common/models/worklog-login.html', {
+      scope: $scope, //继承自父scope
+      animation: 'slide-in-up' //弹出动画
+    }).then(function (modal) {
+      //登录对话框对象
+      $scope.worklogLoginModal = modal;
+      initWorklogParams().then(function () {
+        //获取用户信息
+        window.plugins.startApp.getIntentData(null, function (result) {
+          $scope.loginData.account = result.userName;
+          $scope.loginData.password = result.password;
+          worklogLoginFun();
+        }, function (error) {
+          tipMsg.showMsg(error);
+        });
+      }).catch(function (error) {
+        tipMsg.showMsg(error);
+      });
+    });
+
+    //获取存储的用户设置参数数据
+    function initWorklogParams() {
+      return dbTool.getWorklogUser().then(function (data) {
+        if (data.pushFlag === undefined) {
+          data.pushFlag = true;//默认为true
+        }
+        $scope.pushFlag = data.pushFlag;//是否接受推送信息
+        pushFlagFun();
+        return true;
+      });
+    }
+
+    //开启或关闭推送
+    function pushFlagFun() {
+      if (window.plugins && window.plugins.jPushPlugin) {
+        if ($scope.pushFlag) {
+          window.plugins.jPushPlugin.resumePush();
+        } else {
+          window.plugins.jPushPlugin.stopPush();
+        }
+      }
+    }
+
+    $scope.pushFlagBtnClk = function () {
+      $scope.pushFlag=!$scope.pushFlag;
+      pushFlagFun();
+    };
+
+    //日志系统登录
+    function worklogLoginFun() {
+      tipMsg.loading().show();//显示加载框
+      commonHttp.workLogPost('common/login.action', $scope.loginData).then(function (data) {
+        if (data.indexOf('../workdaily/myDaily.do') != -1) {
+          $scope.isLogin = true;
+          $scope.worklogLoginModal.hide();
+          $rootScope.$broadcast('worklog.refreshworklog');
+        } else if (data.indexOf('账号或密码不正确') != -1) {
+          tipMsg.showMsg('账号或密码不正确');
+          logoutFun();
+        } else {
+          tipMsg.showMsg('未知错误。');
+          logoutFun();
+        }
+      }).catch(function (error) {
+        tipMsg.showMsg('登录出现了错误。');
+        logoutFun();
+      }).finally(function () {
+        dbTool.putWorklogUser($scope.loginData);
+        tipMsg.loading().hide();//显示加载框
+      });
+    }
+
+    //日志系统登出
+    function worklogLogoutFun() {
+      commonHttp.workLogGet('common/logout.do').then(function (data) {
+        //tipMsg.showMsg(data);
+      }).catch(function (error) {
+        tipMsg.showMsg('退出成功\\(^o^)/YES!');
+      }).finally(function () {
+        $scope.isLogin = false;
+      });
+    }
+
+    //退出app
+    function exitAppFun() {
+      ionic.Platform.exitApp();//退出app
+    }
+
+    //跳转至常用设置
+    function toSettingPageFun() {
+      dbTool.getWorklogSetting().then(function (data) {
+        $scope.userSetting.projectsData = data.projectsData || {};
+        $scope.userSetting.favoriteWords = data.favoriteWords || {};
+        $state.go("worklog.setting");
+      }).catch(function (error) {
+        tipMsg.showMsg(error);
+      });
+    }
+
+    function toHelpPageFun() {
+      $state.go("help");
+    }
+
+  }
+
 
   /**
    * 工作日志列表控制器

@@ -7,6 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
+        "cn.jpush.phonegap.JPushPlugin": {
+            "API_KEY": "3c7b423687567f149ad9c627",
+            "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
+        },
+        "com.phonegap.plugins.sqlite": {
+            "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
         },
@@ -33,14 +40,11 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
-        },
-        "cn.jpush.phonegap.JPushPlugin": {
-            "API_KEY": "3c7b423687567f149ad9c627",
-            "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
-        },
-        "com.phonegap.plugins.sqlite": {
-            "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cn.com.chaochuang.startapp": {
+            "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
+        }
+    }
 }
