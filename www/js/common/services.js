@@ -235,7 +235,7 @@
      * @returns {*}
      * @constructor
      */
-    function DbToolFun(tipMsg) {
+    function DbToolFun(tipMsg,$q) {
         var Fac = {
             initWebSqlDb: initWebSqlDbFun,
             putFdData: putFdDataFun,

@@ -63,6 +63,11 @@
           window.plugins.jPushPlugin.stopPush();
         }
       }
+      //保存
+      dbTool.getWorklogUser().then(function (data) {
+        data.pushFlag=$scope.pushFlag||false;
+        dbTool.putWorklogUser(data);
+      });
     }
 
     $scope.pushFlagBtnClk = function () {
@@ -183,6 +188,11 @@
           window.plugins.jPushPlugin.stopPush();
         }
       }
+      //保存
+      dbTool.getWorklogUser().then(function (data) {
+        data.pushFlag=$scope.pushFlag||false;
+        dbTool.putWorklogUser(data);
+      });
     }
 
     $scope.pushFlagBtnClk = function () {
