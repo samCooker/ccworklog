@@ -92,7 +92,7 @@
         }
       }).catch(function (error) {
         tipMsg.showMsg('登录出现了错误。');
-        logoutFun();
+        worklogLogoutFun();
       }).finally(function () {
         dbTool.putWorklogUser($scope.loginData);
         tipMsg.loading().hide();//显示加载框
@@ -272,6 +272,8 @@
     $scope.worklogList = [];
     $scope.submitData = {};
     $scope.searchData = {};
+    //记录查询日期
+    $scope.dateTime=new Date();
     var limitDate = new Date('2016-02-01');//最多只能获取limitDate时间之后的列表数据
 
 
@@ -309,6 +311,7 @@
         var firstDateOfWeek = new Date(_timemill);
         //返回 yyyy-MM-dd 格式日期
         $scope.searchData.day = firstDateOfWeek.getFullYear() + '-' + (firstDateOfWeek.getMonth() + 1) + '-' + firstDateOfWeek.getDate();
+        $scope.dateTime=firstDateOfWeek;
         return true;
       } else {
         // 获取查询日期的上一个星期一日期
@@ -323,7 +326,7 @@
           $scope.$broadcast('scroll.infiniteScrollComplete');
           return false;
         }
-        var _lastSearchDate = new Date($scope.searchData.day).getTime();
+        var _lastSearchDate = $scope.dateTime.getTime();
         var _searchDay = new Date(_lastSearchDate - 7 * 24 * 60 * 60 * 1000);
         //最多只能查询limitDate之后的数据
         if (_searchDay < limitDate) {

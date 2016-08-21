@@ -51,3 +51,17 @@
     text-indent: 2em;
 }
 
+/*查询框删除图标*/
+.ss-search-d-i{
+    position: absolute;
+    top: 13px;
+    right: 110px;
+}
+
+/*查询按钮*/
+.button-search{
+    width: 70px;
+    height: 40px;
+    min-height: 40px;
+    margin: 0 10px;
+}

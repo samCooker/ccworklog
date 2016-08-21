@@ -13,8 +13,8 @@ appModule.run(function ($ionicPlatform, $location, $rootScope, $ionicHistory, $s
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
         if (window.StatusBar) {
-            //StatusBar.styleDefault();
-            StatusBar.styleBlackTranslucent();
+            StatusBar.styleDefault();
+            //StatusBar.styleBlackTranslucent();
         }
 
         //推送服务

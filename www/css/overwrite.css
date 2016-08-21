@@ -5,7 +5,10 @@
 /*.loading-container .loading {*/
     /*background-color: inherit;*/
 /*}*/
-
+/*ios 离顶部的距离*/
+.platform-ios.platform-cordova:not(.fullscreen) .bar-subheader, .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .tabs-top>.tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top{
+    top:80px;
+}
 /*自动换行*/
 .ss-item-p{
     white-space: initial;

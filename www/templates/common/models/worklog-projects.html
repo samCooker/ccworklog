@@ -1,14 +1,13 @@
 <!--模板需放在 ion-modal-view 标签内-->
 <ion-modal-view>
-    <ion-header-bar class="item-input-inset positive-bg">
-            <button class="button button-icon button-clear ion-android-checkmark-circle" ng-click="saveWorklogSetting()"></button>
-            <label class="item-input-wrapper">
-                <i class="icon ion-ios-search placeholder-icon"></i>
-                <input type="search" placeholder="请输入项目名称进行查询" ng-model="searchPrjsParams.prjName">
-            </label>
-            <button class="button button-clear" ng-click="doRefreshProjects()">
-                <i class="icon ion-ios-search"></i>
-            </button>
+    <ion-header-bar class="positive-bg">
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-chevron-left" ng-click="worklogFavoritePrjModal.hide()"></button>
+        </div>
+        <h1 class="title">项目列表</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-android-checkmark-circle" ng-click="saveWorklogSetting()"></button>
+        </div>
     </ion-header-bar>
     <ion-content class="stable-bg has-header">
         <ion-refresher on-refresh="doRefreshProjects()"
@@ -16,6 +15,15 @@
                        refreshing-text="正在刷新"
                        spinner="android">
         </ion-refresher>
+        <!--查询框-->
+        <div class="item item-input">
+            <i class="icon ion-search placeholder-icon ss-log-i-20"></i>
+            <input type="text" placeholder="输入查询" ng-model="searchPrjsParams.prjName">
+            <i class="icon ion-close-round placeholder-icon ss-log-i-20 ss-search-d-i" ng-if="searchPrjsParams.prjName" ng-click="searchPrjsParams.prjName=''"></i>
+            <button class="button button-positive button-search" ng-click="doRefreshProjects()">
+                查&nbsp;&nbsp;询
+            </button>
+        </div>
         <ion-list>
             <ion-checkbox ng-repeat="project in projectsData" ng-click="chooseProject(project)" ng-model="project.isSelect">{{project.id}}&nbsp;&nbsp;&nbsp;&nbsp;{{project.name}}</ion-checkbox>
         </ion-list>

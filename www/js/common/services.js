@@ -168,9 +168,15 @@
                 window.plugins.datePicker.show(
                     opts,
                     function(returnDate) {
-                        defer.resolve(returnDate);
+                        console.log(returnDate);
+                        if(returnDate){
+                            defer.resolve(returnDate);
+                        }else{
+                            defer.reject("没有选择日期");
+                        }
                     },
                     function(error) {
+                        console.log(error);
                         //取消事件
                         defer.reject("取消");
                     }
