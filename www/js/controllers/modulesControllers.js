@@ -145,6 +145,7 @@
     $scope.toSettingPage = toSettingPageFun;//跳转至常用设置
     $scope.toHelpPage = toHelpPageFun;
     $scope.userSetting = {};//用户设置信息
+    $scope.validateCodeUrl='http://116.10.203.202:7070/nnccoa/login/validateCode';
 
     // 创建一个登录对话框
     $ionicModal.fromTemplateUrl('templates/common/models/worklog-login.html', {
@@ -200,20 +201,26 @@
       pushFlagFun();
     };
 
+    //验证码
+    $scope.getValidateCode = function () {
+      $scope.validateCodeUrl='http://116.10.203.202:7070/nnccoa/login/validateCode?_t='+new Date().getTime();
+    };
+
     //日志系统登录
     function worklogLoginFun() {
       tipMsg.loading().show();//显示加载框
-      commonHttp.workLogPost('common/login.action', $scope.loginData).then(function (data) {
+      commonHttp.workLogPost('common/login', $scope.loginData).then(function (data) {
         if (data.indexOf('../workdaily/myDaily.do') != -1) {
           $scope.isLogin = true;
           $scope.worklogLoginModal.hide();
           $rootScope.$broadcast('worklog.refreshworklog');
-        } else if (data.indexOf('账号或密码不正确') != -1) {
-          tipMsg.showMsg('账号或密码不正确');
-          logoutFun();
+        } else if (data.indexOf('验证码不正确！') != -1) {
+          tipMsg.showMsg('验证码不正确！');
+        } else if (data.indexOf('用户名或密码错误') != -1) {
+          tipMsg.showMsg('用户名或密码错误');
         } else {
           tipMsg.showMsg('未知错误。');
-          logoutFun();
+          worklogLogoutFun();
         }
       }).catch(function (error) {
         tipMsg.showMsg('登录出现了错误。');
