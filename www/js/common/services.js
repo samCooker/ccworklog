@@ -643,7 +643,7 @@
             var delay = $q.defer();
             var req = {
                 method: 'POST',
-                url: 'http://116.10.203.202:7070/ccoa/'+url,
+                url: 'http://116.10.203.202:7070/nnccoa/'+url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -682,7 +682,7 @@
             var delay = $q.defer();
             var req = {
                 method: 'GET',
-                url: 'http://116.10.203.202:7070/ccoa/'+url,
+                url: 'http://116.10.203.202:7070/nnccoa/'+url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
