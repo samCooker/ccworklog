@@ -18,7 +18,7 @@
      */
     function WorklogHomeController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool) {
         $scope.loginData = {};
-        $scope.isLogin = false;//是否登录
+        $rootScope.isLogin = false;//是否登录
         $scope.worklogLogin = worklogLoginFun;//登录日志系统
         $scope.worklogLogout = worklogLogoutFun;//登出日志系统
         $scope.exitApp = exitAppFun;//退出app
@@ -71,7 +71,7 @@
             commonHttp.workLogPost('common/login', $scope.loginData).then(function (data) {
                 //含有我的工作日志url
                 if (data.indexOf('http://116.10.203.202:7070/nnccoa/oa/workDaily/myDaily') != -1) {
-                    $scope.isLogin = true;
+                    $rootScope.isLogin = true;
                     $scope.worklogLoginModal.hide();
                     $rootScope.$broadcast('worklog.refreshworklog');
                 } else if (data.indexOf('账号或密码不正确') != -1) {
@@ -114,7 +114,7 @@
             }).catch(function (error) {
                 tipMsg.showMsg('退出成功\\(^o^)/YES!');
             }).finally(function () {
-                $scope.isLogin = false;
+                $rootScope.isLogin = false;
             });
         }
 
@@ -152,10 +152,10 @@
             //登录对话框对象
             $scope.worklogLoginModal = modal;
             initWorklogUser().then(function () {
-                $scope.worklogLoginModal.show();
+                //$scope.worklogLoginModal.show();
             }).catch(function (error) {
                 tipMsg.showMsg(error);
-                $scope.worklogLoginModal.show();
+               //$scope.worklogLoginModal.show();
             });
         });
 
@@ -169,7 +169,7 @@
      */
     function WorklogHomeOtherController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool) {
         $scope.loginData = {};
-        $scope.isLogin = false;//是否登录
+        $rootScope.isLogin = false;//是否登录
         $scope.worklogLogin = worklogLoginFun;//登录日志系统
         $scope.worklogLogout = worklogLogoutFun;//登出日志系统
         $scope.exitApp = exitAppFun;//退出app
@@ -242,7 +242,7 @@
             tipMsg.loading().show();//显示加载框
             commonHttp.workLogPost('common/login', $scope.loginData).then(function (data) {
                 if (data.indexOf('../workdaily/myDaily.do') != -1) {
-                    $scope.isLogin = true;
+                    $rootScope.isLogin = true;
                     $scope.worklogLoginModal.hide();
                     $rootScope.$broadcast('worklog.refreshworklog');
                 } else if (data.indexOf('验证码不正确！') != -1) {
@@ -269,7 +269,7 @@
             }).catch(function (error) {
                 tipMsg.showMsg('退出成功\\(^o^)/YES!');
             }).finally(function () {
-                $scope.isLogin = false;
+                $rootScope.isLogin = false;
             });
         }
 
@@ -649,6 +649,17 @@
                 }
             });
         }
+
+        //获取列表。若无数据则说明没有登录
+        worklogFac.getWorklogList(false,$scope.searchData).then(function (result) {
+            if (result && result.rows && result.rows.length > 0) {
+                $rootScope.isLogin = true;//是否登录
+                $scope.worklogList = result.rows;
+            } else {
+                tipMsg.showMsg('请先登录。');
+                $scope.worklogLoginModal.show();
+            }
+        });
 
     }
 
