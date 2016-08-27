@@ -18,9 +18,9 @@
         </ion-refresher>
         <ion-list>
             <ion-item collection-repeat="worklog in worklogList" class="item item-icon-left" ng-click="detailItem(worklog)">
-                <i class="icon iconfont" ng-class="[worklog.iconColorCls,worklog.dayClassName]"></i>
-                <h2>&nbsp;&nbsp;{{worklog.date}}</h2>
-                <p >{{worklog.item}}</p>
+                <i class="icon iconfont" ng-class="{'calm':!worklog.iconColorCls,'assertive':worklog.iconColorCls,'ion-ios-timer':worklog.useHours>=4,'ion-ios-timer-outline':worklog.useHours<4}"></i>
+                <h2>&nbsp;&nbsp;{{worklog.workDateShow}}</h2>
+                <p >{{worklog.content}}</p>
                 <!--列表按钮 -->
                 <!--<ion-option-button class="button-info" ng-click="editItem(worklog)">-->
                     <!--<i class="icon ion-compose"></i>-->

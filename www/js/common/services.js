@@ -439,7 +439,7 @@
          * @returns {*}
          */
         function getWorklogDataFun() {
-            return findDataByIdFun(_worklogId,['_id','useHours', 'workType', 'prjNo', 'prjName','content','evaSelf']);
+            return findDataByIdFun(_worklogId,['_id','useHours', 'workType', 'project', 'prjName','content','evaSelf']);
         }
 
         /**
@@ -679,12 +679,6 @@
          * 工作日志系统登录 get
          */
         function workLogGetFun(url) {
-            var _time=new Date().getTime();
-            if(url.indexOf('?')!=-1){
-                url=url+'&_='+_time;
-            }else{
-                url=url+'?_='+_time;
-            }
             var delay = $q.defer();
             var req = {
                 method: 'GET',

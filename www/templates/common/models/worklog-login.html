@@ -16,8 +16,11 @@
                 <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
                 <input type="password" ng-model="loginData.password" placeholder="password">
             </label>
-            <label class="text-center">
-                <img src="http://116.10.203.202:7070/nnccoa/login/validateCode" ng-click="getValidateCode()"></img>
+            <label class="item item-input">
+                <input class="login-i" type="text" ng-model="loginData.code" placeholder="输入验证码" >
+            </label>
+            <label class="item" ng-click="getValidateCode()">
+                <img class="login-v-c" ng-src="{{validateCodeUrl}}" alt="验证码"/>
             </label>
             <label class="item">
                 <button class="button button-block button-positive" ng-click="worklogLogin()">登录</button>
