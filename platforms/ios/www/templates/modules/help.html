@@ -1,0 +1,26 @@
+<ion-header-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+    <cs-return-btn></cs-return-btn>
+    <label class="title">帮助</label>
+</ion-header-bar>
+<ion-content class="stable-bg has-header">
+    <ion-slide-box does-continue="true" class="ss-slide-box">
+        <ion-slide ng-repeat="imgageItem in helpImgageItems">
+            <div class="text-center" style="padding-top: 10px;height: 500px">
+                <img ng-src="{{imgageItem.src}}">
+            </div>
+        </ion-slide>
+        <ion-slide >
+            <div style="padding-top: 10px;height: 500px">
+                <p class="ss-text-indent">
+                   此app是在原填写工作日志系统上编写的，目的是为了方便使用手机和平板填写工作日志。
+                </p>
+                <p class="ss-text-indent">
+                    若发现bug,可发送邮件（984616868@qq.com）告知。
+                </p>
+                <p class="ss-text-indent">
+                    需要源代码的，可到<b>https://github.com/samCooker/ccworklog.git</b>下载。
+                </p>
+            </div>
+        </ion-slide>
+    </ion-slide-box>
+</ion-content>

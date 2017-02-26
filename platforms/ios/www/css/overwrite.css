@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/*覆盖ionic原有的样式*/
+
+/*覆盖ionic的加载样式*/
+/*.loading-container .loading {*/
+    /*background-color: inherit;*/
+/*}*/
+/*ios 离顶部的距离*/
+.platform-ios.platform-cordova:not(.fullscreen) .bar-subheader, .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .tabs-top>.tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top{
+    top:80px;
+}
+/*自动换行*/
+.ss-item-p{
+    white-space: initial;
+}
+.ss-item-margin{
+    margin: 1px 15px;
+}
+.ss-slide-box{
+    height: 100%;
+}
+.ss-slide-box .slider-pager{
+    position: absolute;
+    top: 95%;
+    z-index: 1;
+    width: 100%;
+    height: 15px;
+    text-align: center;
+}
+/*修改Android样式*/
+.platform-android .action-sheet .action-sheet-title,
+.platform-android .action-sheet .button {
+    text-align: center;
+    border-color: #d1d3d6;
+    font-size: 16px;
+    color: #007aff;
+}
+
+/*input 宽度*/
+.item-input-wrapper input{
+    width: 90%;
+}

@@ -1,0 +1,71 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-view view-title="工作日志设置">
+  <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+    <ion-nav-buttons side="left"><!--左边的按钮-->
+      <!--打开左侧边栏-->
+      <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+      </button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="list">
+      <div class="card">
+        <div class="item item-divider">
+          添加词汇
+        </div>
+        <div class="list">
+          <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+              <input type="text" placeholder="请输入词汇" ng-model="inputModel.wordDetail">
+            </label>
+            <button class="button button-clear button-small" ng-click="saveFavoriteWord()">
+              <i class="icon iconfont ss-icon-save calm"></i>
+              保存
+            </button>
+          </div>
+        </div>
+        <div class="item item-divider">词汇详情</div>
+        <ion-list show-delete="true">
+          <ion-item ng-repeat="(wordId,wordDetail) in userSetting.favoriteWords"
+                    class="item-remove-animate item-text-wrap">
+            <div>{{wordDetail}}</div>
+            <ion-delete-button class="ion-minus-circled" ng-click="deleteFavoriteWord(wordId)"></ion-delete-button>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div class="card">
+        <div class="item item-divider" ng-click="selectFavoriteProject()">
+          常用项目 &nbsp;&nbsp;&nbsp;&nbsp;<i class="icon ion-edit calm"></i>
+        </div>
+        <ion-list show-delete="true">
+          <ion-item ng-repeat="(prjNo,prjName) in userSetting.projectsData" class="item-remove-animate item-text-wrap">
+            <div>项目编号：{{prjNo}}</div>
+            <div>项目名称：{{prjName}}</div>
+            <ion-delete-button class="ion-minus-circled" ng-click="deleteSelectedPrj(prjNo)"></ion-delete-button>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <!--<div class="card">-->
+      <!--<div class="item item-divider">-->
+      <!--评价-->
+      <!--</div>-->
+      <!--<cs-ion-radio ng-model="userSetting.evaSelf" name="evaSelf" ng-value="'1'">一般</cs-ion-radio>-->
+      <!--<cs-ion-radio ng-model="userSetting.evaSelf" name="evaSelf" ng-value="'2'">满意</cs-ion-radio>-->
+      <!--<cs-ion-radio ng-model="userSetting.evaSelf" name="evaSelf" ng-value="'3'">非常满意</cs-ion-radio>-->
+      <!--<cs-ion-radio ng-model="userSetting.evaSelf" name="evaSelf" ng-value="'4'">不满意</cs-ion-radio>-->
+      <!--</div>-->
+      <!--<div class="card">-->
+      <!--<div class="item item-divider">-->
+      <!--类型-->
+      <!--</div>-->
+      <!--<cs-ion-radio ng-model="userSetting.workType" name="workType" ng-value="'1'">项目</cs-ion-radio>-->
+      <!--<cs-ion-radio ng-model="userSetting.workType" name="workType" ng-value="'2'">学习</cs-ion-radio>-->
+      <!--<cs-ion-radio ng-model="userSetting.workType" name="workType" ng-value="'7'">请假</cs-ion-radio>-->
+      <!--<cs-ion-radio ng-model="userSetting.workType" name="workType" ng-value="'9'">其他</cs-ion-radio>-->
+      <!--</div>-->
+
+    </div>
+  </ion-content>
+</ion-view>

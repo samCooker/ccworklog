@@ -1,0 +1,87 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-view view-title="工作日志填写">
+    <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+        <ion-nav-buttons side="left"><!--左边的按钮-->
+            <cs-return-btn></cs-return-btn>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <i class="icon ion-android-checkmark-circle ss-log-i-30" ng-click="submitWorkLog()">
+            </i>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list">
+            <div class="card">
+                <div class="item item-divider" ng-click="selectFavoriteProject()">
+                    <i class="icon ion-ios-list-outline calm ss-log-i-20" ></i>&nbsp;&nbsp;项目信息:
+                </div>
+                <label class="item item-icon-right">编号:{{submitData.project}}</label>
+                <label class="item item-icon-right">名称:{{submitData.prjName}}</label>
+            </div>
+            <div class="card">
+                <div class="item item-divider" ng-click="selectFavoriteWords()">
+                    <i class="icon ion-ios-paper calm ss-log-i-20" ></i>&nbsp;&nbsp;工作内容:
+                </div>
+                <label class="item item-input item-stacked-label">
+                    <textarea ng-model="submitData.content" placeholder="请填写工作内容，不少于20个字符。" rows="3" ng-focus="contentOffsetTo()"></textarea>
+                </label>
+            </div>
+            <div class="card">
+                <div class="item item-divider" id="use-hour-id">
+                    用时:
+                </div>
+                <div class="item item-input item-stacked-label">
+                    <div class="range range-positive">
+                        <span style="width: 40px;">{{submitData.useHours}}</span>
+                        <i class="icon ion-ios-clock-outline"></i>
+                        <input type="range" ng-model="submitData.useHours" min="0" max="5" step="0.5" />
+                        <i class="icon ion-ios-clock"></i>
+                    </div>
+                </div>
+                <div class="item item-divider">
+                    评价:
+                </div>
+                <div class="item item-input item-stacked-label">
+                    <div class="range range-positive">
+                        <span style="width: 65px;">{{evaSelfName}}</span>
+                        <i class="icon ion-android-happy"></i>
+                        <input type="range" ng-model="submitData.evaSelf" min="1" max="4" ng-change="evaSelfName=evaSelfArr[submitData.evaSelf]" />
+                        <i class="icon ion-android-sad"></i>
+                    </div>
+                </div>
+                <div class="item item-divider">
+                    类型:
+                </div>
+                <cs-ion-radio ng-model="submitData.workType" ng-value="'1'">项目</cs-ion-radio>
+                <cs-ion-radio ng-model="submitData.workType" ng-value="'2'">学习</cs-ion-radio>
+                <cs-ion-radio ng-model="submitData.workType" ng-value="'7'">请假</cs-ion-radio>
+                <cs-ion-radio ng-model="submitData.workType" ng-value="'9'">其他</cs-ion-radio>
+            </div>
+            <div class="card">
+                <div class="item item-divider">
+                基本信息:
+            </div>
+                <div class="item item-input item-stacked-label">
+                    <div class="row">
+                    <div class="col-20 ss-text-right">日志ID:</div><div class="col-80 ss-item-margin">{{submitData.id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-20 ss-text-right">填写日期ID:</div><div class="col-80 ss-item-margin">{{submitData.workDaily}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-20 ss-text-right">填写日期:</div><div class="col-80 ss-item-margin">{{submitData.workDateShow}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-20 ss-text-right">当前用户:</div><div class="col-80 ss-item-margin">{{loginData.account}}</div>
+                    </div>
+                </div>
+            </div>
+            <label class="item">
+                <button class="button button-block button-positive" ng-click="submitWorkLog()">
+                    <span ng-if="submitData.id">修改</span>
+                    <span ng-if="!submitData.id">添加</span>
+                </button>
+            </label>
+        </div>
+    </ion-content>
+</ion-view>

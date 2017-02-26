@@ -1,0 +1,24 @@
+
+@font-face {
+    font-family: "iconfont";
+    src:url('iconfont.ttf?t=1461485798') format('truetype') /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ss-icon-num1:before { content: "\e648"; }
+.ss-icon-num4:before { content: "\e646"; }
+.ss-icon-num6:before { content: "\e643"; }
+/*数字7 */
+.ss-icon-num0:before { content: "\e644"; }
+.ss-icon-num3:before { content: "\e645"; }
+.ss-icon-num5:before { content: "\e647"; }
+.ss-icon-num2:before { content: "\e641"; }
+
+.ss-icon-save:before { content: "\e684"; }
