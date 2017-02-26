@@ -27,6 +27,22 @@
         $scope.userSetting = {};//用户设置信息
         $scope.validateCodeUrl = 'http://116.10.203.202:7070/nnccoa/login/validateCode?_t=0';
 
+
+        // 创建一个登录对话框
+        $ionicModal.fromTemplateUrl('templates/common/models/worklog-login.html', {
+            scope: $scope, //继承自父scope
+            animation: 'slide-in-up' //弹出动画
+        }).then(function (modal) {
+            //登录对话框对象
+            $scope.worklogLoginModal = modal;
+            initWorklogUser().then(function () {
+                //$scope.worklogLoginModal.show();
+            }).catch(function (error) {
+                tipMsg.showMsg(error);
+                //$scope.worklogLoginModal.show();
+            });
+        });
+
         //获取本地存储的用户数据
         function initWorklogUser() {
             return dbTool.getWorklogUser().then(function (data) {
@@ -143,21 +159,6 @@
             console.log('change');
             $scope.validateCodeUrl = 'http://116.10.203.202:7070/nnccoa/login/validateCode?_t=' + new Date().getTime();
         };
-
-        // 创建一个登录对话框
-        $ionicModal.fromTemplateUrl('templates/common/models/worklog-login.html', {
-            scope: $scope, //继承自父scope
-            animation: 'slide-in-up' //弹出动画
-        }).then(function (modal) {
-            //登录对话框对象
-            $scope.worklogLoginModal = modal;
-            initWorklogUser().then(function () {
-                //$scope.worklogLoginModal.show();
-            }).catch(function (error) {
-                tipMsg.showMsg(error);
-               //$scope.worklogLoginModal.show();
-            });
-        });
 
     }
 

@@ -217,18 +217,9 @@
         function checkConnectionFun() {
             if(navigator&&navigator.connection) {
                 //网络连接状况
-                var _netStates = {};
-                _netStates[Connection.UNKNOWN] = '未知网络';
-                _netStates[Connection.ETHERNET] = '以太网';
-                _netStates[Connection.WIFI] = 'WiFi网络';
-                _netStates[Connection.CELL_2G] = '2G网络';
-                _netStates[Connection.CELL_3G] = '3G网络';
-                _netStates[Connection.CELL_4G] = '4G网络';
-                _netStates[Connection.CELL] = '通用连接';
-                _netStates[Connection.NONE] = '无网络连接';
                 var networkState = navigator.connection.type;
-                var _isConn=Connection.NONE != networkState;
-                return {isConn:_isConn,type:_netStates[networkState]};
+                var _isConn="none" != networkState;
+                return {isConn:_isConn,type:networkState};
             }
             return {isConn:true,type:'无法检测网络连接'};
         }

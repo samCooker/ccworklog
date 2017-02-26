@@ -43,8 +43,5 @@
         }
     },
     "dependent_plugins": {
-        "cn.com.chaochuang.startapp": {
-            "PACKAGE_NAME": "com.ionicframework.ccworklog586082"
-        }
     }
 }
