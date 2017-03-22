@@ -18,14 +18,14 @@
         <!--查询框-->
         <div class="item item-input">
             <i class="icon ion-search placeholder-icon ss-log-i-20"></i>
-            <input type="text" placeholder="输入查询" ng-model="searchPrjsParams.prjName">
-            <i class="icon ion-close-round placeholder-icon ss-log-i-20 ss-search-d-i" ng-if="searchPrjsParams.prjName" ng-click="searchPrjsParams.prjName=''"></i>
+            <input type="text" placeholder="输入查询" ng-model="searchPrjsParams.__LIKE__prjName">
+            <i class="icon ion-close-round placeholder-icon ss-log-i-20 ss-search-d-i" ng-if="searchPrjsParams.__LIKE__prjName" ng-click="searchPrjsParams.__LIKE__prjName=''"></i>
             <button class="button button-positive button-search" ng-click="doRefreshProjects()">
                 查&nbsp;&nbsp;询
             </button>
         </div>
         <ion-list>
-            <ion-checkbox ng-repeat="project in projectsData" ng-click="chooseProject(project)" ng-model="project.isSelect">{{project.id}}&nbsp;&nbsp;&nbsp;&nbsp;{{project.name}}</ion-checkbox>
+            <ion-checkbox ng-repeat="project in projectsData" ng-click="chooseProject(project)" ng-model="project.isSelect">{{project.prjNo}}&nbsp;&nbsp;&nbsp;&nbsp;{{project.prjName}}</ion-checkbox>
         </ion-list>
         <!--可设置ng-if防止无限加载-->
         <ion-infinite-scroll on-infinite="loadMoreProjects()" spinner="android" distance="1%" immediate-check="false" ng-if="!isProjectsLoadEnd"></ion-infinite-scroll>

@@ -16,7 +16,7 @@
      * 工作日志父类控制器
      * @constructor
      */
-    function WorklogHomeController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool) {
+    function WorklogHomeController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool,appConfig){
         $scope.loginData = {};
         $rootScope.isLogin = false;//是否登录
         $scope.worklogLogin = worklogLoginFun;//登录日志系统
@@ -25,7 +25,7 @@
         $scope.toSettingPage = toSettingPageFun;//跳转至常用设置
         $scope.toHelpPage = toHelpPageFun;
         $scope.userSetting = {};//用户设置信息
-        $scope.validateCodeUrl = 'http://116.10.203.202:7070/nnccoa/login/validateCode?_t=0';
+        $scope.validateCodeUrl = appConfig.getCcWorkLogUrl()+'login/validateCode?_t=0';
 
 
         // 创建一个登录对话框
@@ -86,7 +86,7 @@
             tipMsg.loading().show();//显示加载框
             commonHttp.workLogPost('common/login', $scope.loginData).then(function (data) {
                 //含有我的工作日志url
-                if (data.indexOf('http://116.10.203.202:7070/nnccoa/oa/workDaily/myDaily') != -1) {
+                if (data.indexOf(appConfig.getCcWorkLogUrl()+'oa/workDaily/myDaily') != -1) {
                     $rootScope.isLogin = true;
                     $scope.worklogLoginModal.hide();
                     $rootScope.$broadcast('worklog.refreshworklog');
@@ -157,7 +157,7 @@
         //验证码
         $scope.getValidateCode = function () {
             console.log('change');
-            $scope.validateCodeUrl = 'http://116.10.203.202:7070/nnccoa/login/validateCode?_t=' + new Date().getTime();
+            $scope.validateCodeUrl = appConfig.getCcWorkLogUrl()+'login/validateCode?_t=' + new Date().getTime();
         };
 
     }
@@ -168,7 +168,7 @@
      * @constructor
      * @
      */
-    function WorklogHomeOtherController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool) {
+    function WorklogHomeOtherController($scope, $ionicModal, $rootScope, $state, commonHttp, tipMsg, dbTool,appConfig) {
         $scope.loginData = {};
         $rootScope.isLogin = false;//是否登录
         $scope.worklogLogin = worklogLoginFun;//登录日志系统
@@ -177,7 +177,7 @@
         $scope.toSettingPage = toSettingPageFun;//跳转至常用设置
         $scope.toHelpPage = toHelpPageFun;
         $scope.userSetting = {};//用户设置信息
-        $scope.validateCodeUrl = 'http://116.10.203.202:7070/nnccoa/login/validateCode';
+        $scope.validateCodeUrl = appConfig.getCcWorkLogUrl()+'login/validateCode';
 
         // 创建一个登录对话框
         $ionicModal.fromTemplateUrl('templates/common/models/worklog-login.html', {
@@ -235,7 +235,7 @@
 
         //验证码
         $scope.getValidateCode = function () {
-            $scope.validateCodeUrl = 'http://116.10.203.202:7070/nnccoa/login/validateCode?_t=' + new Date().getTime();
+            $scope.validateCodeUrl = appConfig.getCcWorkLogUrl()+'login/validateCode?_t=' + new Date().getTime();
         };
 
         //日志系统登录

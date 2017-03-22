@@ -15,7 +15,7 @@
                 <div class="item item-divider" ng-click="selectFavoriteProject()">
                     <i class="icon ion-ios-list-outline calm ss-log-i-20" ></i>&nbsp;&nbsp;项目信息:
                 </div>
-                <label class="item item-icon-right">编号:{{submitData.prjNo}}</label>
+                <label class="item item-icon-right">编号:{{submitData.project}}</label>
                 <label class="item item-icon-right">名称:{{submitData.prjName}}</label>
             </div>
             <div class="card">
@@ -62,14 +62,14 @@
                 基本信息:
             </div>
                 <div class="item item-input item-stacked-label">
-                    <!--<div class="row">-->
-                    <!--<div class="col-20 ss-text-right">日志ID:</div><div class="col-80 ss-item-margin">{{submitData.id}}</div>-->
-                    <!--</div>-->
                     <div class="row">
-                        <div class="col-20 ss-text-right">填写日期ID:</div><div class="col-80 ss-item-margin">{{submitData.dailyId}}</div>
+                    <div class="col-20 ss-text-right">日志ID:</div><div class="col-80 ss-item-margin">{{submitData.id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-20 ss-text-right">填写日期:</div><div class="col-80 ss-item-margin">{{submitData.workDate}}</div>
+                        <div class="col-20 ss-text-right">填写日期ID:</div><div class="col-80 ss-item-margin">{{submitData.workDaily}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-20 ss-text-right">填写日期:</div><div class="col-80 ss-item-margin">{{submitData.workDateShow}}</div>
                     </div>
                     <div class="row">
                         <div class="col-20 ss-text-right">当前用户:</div><div class="col-80 ss-item-margin">{{loginData.account}}</div>

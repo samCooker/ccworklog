@@ -83,6 +83,7 @@ appModule.config(function ($ionicConfigProvider,$httpProvider) {
 appModule.factory('appConfig', function () {
     var host = '192.168.1.179';
     var port = '8080';
+    var ccWorkLogUrl = 'http://120.77.149.76:7070/nnccoa/';
     var isLocal = true;
     var debugUser={username:'cookie',password:'cookie4cook'};
 
@@ -91,9 +92,13 @@ appModule.factory('appConfig', function () {
         setLocalDebug: setLocalDebugFun,//设置是否离线
         getHost: getHostFun,//获取http请求url
         getLocalHost: getLocalHostFun,//获取离线数据的url
-        getDebugUser:getDebugUserFun
+        getDebugUser:getDebugUserFun,
+        getCcWorkLogUrl:getCcWorkLogUrlFun
     };
 
+    function getCcWorkLogUrlFun(){
+        return ccWorkLogUrl;
+    }
     /**
      * 获取http请求url
      * @returns {string}

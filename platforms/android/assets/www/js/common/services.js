@@ -217,18 +217,9 @@
         function checkConnectionFun() {
             if(navigator&&navigator.connection) {
                 //网络连接状况
-                var _netStates = {};
-                _netStates[Connection.UNKNOWN] = '未知网络';
-                _netStates[Connection.ETHERNET] = '以太网';
-                _netStates[Connection.WIFI] = 'WiFi网络';
-                _netStates[Connection.CELL_2G] = '2G网络';
-                _netStates[Connection.CELL_3G] = '3G网络';
-                _netStates[Connection.CELL_4G] = '4G网络';
-                _netStates[Connection.CELL] = '通用连接';
-                _netStates[Connection.NONE] = '无网络连接';
                 var networkState = navigator.connection.type;
-                var _isConn=Connection.NONE != networkState;
-                return {isConn:_isConn,type:_netStates[networkState]};
+                var _isConn="none" != networkState;
+                return {isConn:_isConn,type:networkState};
             }
             return {isConn:true,type:'无法检测网络连接'};
         }
@@ -439,7 +430,7 @@
          * @returns {*}
          */
         function getWorklogDataFun() {
-            return findDataByIdFun(_worklogId,['_id','useHours', 'workType', 'prjNo', 'prjName','content','evaSelf']);
+            return findDataByIdFun(_worklogId,['_id','useHours', 'workType', 'project', 'prjName','content','evaSelf']);
         }
 
         /**
@@ -514,7 +505,7 @@
     /**
      * 对http请求的一个封装，可设置请求json数据方便调试
      */
-    function CommonHttpFun($q, $http,$httpParamSerializer, appConfig, tipMsg,tools) {
+    function CommonHttpFun($q, $http,$httpParamSerializer, appConfig, tipMsg,tools,appConfig) {
 
         var _data={};//可在多个controller中传递的数据对象
 
@@ -649,7 +640,7 @@
             var delay = $q.defer();
             var req = {
                 method: 'POST',
-                url: 'http://116.10.203.202:7070/ccoa/'+url,
+                url: appConfig.getCcWorkLogUrl()+url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -679,16 +670,10 @@
          * 工作日志系统登录 get
          */
         function workLogGetFun(url) {
-            var _time=new Date().getTime();
-            if(url.indexOf('?')!=-1){
-                url=url+'&_='+_time;
-            }else{
-                url=url+'?_='+_time;
-            }
             var delay = $q.defer();
             var req = {
                 method: 'GET',
-                url: 'http://116.10.203.202:7070/ccoa/'+url,
+                url: appConfig.getCcWorkLogUrl()+url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },

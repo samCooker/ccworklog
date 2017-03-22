@@ -16,7 +16,7 @@
                            refreshing-text="正在刷新!"
                            spinner="android">
             </ion-refresher>
-            <ion-item ng-repeat="(prjId,prjName) in projectsSelfData" ng-click="chooseProjectBringBack(prjId)">
+            <ion-item ng-repeat="(prjNo,prjName) in projectsSelfData" ng-click="chooseProjectBringBack(prjNo)">
                 <div>{{prjId}}&nbsp;&nbsp;&nbsp;&nbsp;{{prjName}}</div>
             </ion-item>
         </ion-list>

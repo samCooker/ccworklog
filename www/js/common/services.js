@@ -505,7 +505,7 @@
     /**
      * 对http请求的一个封装，可设置请求json数据方便调试
      */
-    function CommonHttpFun($q, $http,$httpParamSerializer, appConfig, tipMsg,tools) {
+    function CommonHttpFun($q, $http,$httpParamSerializer, appConfig, tipMsg,tools,appConfig) {
 
         var _data={};//可在多个controller中传递的数据对象
 
@@ -640,7 +640,7 @@
             var delay = $q.defer();
             var req = {
                 method: 'POST',
-                url: 'http://116.10.203.202:7070/nnccoa/'+url,
+                url: appConfig.getCcWorkLogUrl()+url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -673,7 +673,7 @@
             var delay = $q.defer();
             var req = {
                 method: 'GET',
-                url: 'http://116.10.203.202:7070/nnccoa/'+url,
+                url: appConfig.getCcWorkLogUrl()+url,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },

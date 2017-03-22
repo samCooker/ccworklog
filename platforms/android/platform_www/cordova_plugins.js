@@ -1,101 +1,81 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cn.com.chaochuang.startapp.StartActivity",
-        "file": "plugins/cn.com.chaochuang.startapp/www/StartActivity.js",
-        "pluginId": "cn.com.chaochuang.startapp",
-        "clobbers": [
-            "window.plugins.startApp"
-        ]
-    },
-    {
-        "id": "cn.jpush.phonegap.JPushPlugin.JPushPlugin",
         "file": "plugins/cn.jpush.phonegap.JPushPlugin/www/JPushPlugin.js",
-        "pluginId": "cn.jpush.phonegap.JPushPlugin",
+        "id": "cn.jpush.phonegap.JPushPlugin.JPushPlugin",
         "clobbers": [
             "jPushPlugin"
         ]
     },
     {
-        "id": "cordova-plugin-datepicker.DatePicker",
         "file": "plugins/cordova-plugin-datepicker/www/android/DatePicker.js",
-        "pluginId": "cordova-plugin-datepicker",
+        "id": "cordova-plugin-datepicker.DatePicker",
         "clobbers": [
             "datePicker"
         ]
     },
     {
-        "id": "cordova-plugin-device.device",
         "file": "plugins/cordova-plugin-device/www/device.js",
-        "pluginId": "cordova-plugin-device",
+        "id": "cordova-plugin-device.device",
         "clobbers": [
             "device"
         ]
     },
     {
-        "id": "cordova-plugin-network-information.network",
         "file": "plugins/cordova-plugin-network-information/www/network.js",
-        "pluginId": "cordova-plugin-network-information",
+        "id": "cordova-plugin-network-information.network",
         "clobbers": [
             "navigator.connection",
             "navigator.network.connection"
         ]
     },
     {
-        "id": "cordova-plugin-network-information.Connection",
         "file": "plugins/cordova-plugin-network-information/www/Connection.js",
-        "pluginId": "cordova-plugin-network-information",
+        "id": "cordova-plugin-network-information.Connection",
         "clobbers": [
             "Connection"
         ]
     },
     {
-        "id": "cordova-plugin-splashscreen.SplashScreen",
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "pluginId": "cordova-plugin-splashscreen",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
         "clobbers": [
             "navigator.splashscreen"
         ]
     },
     {
-        "id": "cordova-plugin-statusbar.statusbar",
         "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-        "pluginId": "cordova-plugin-statusbar",
+        "id": "cordova-plugin-statusbar.statusbar",
         "clobbers": [
             "window.StatusBar"
         ]
     },
     {
-        "id": "cordova-plugin-whitelist.whitelist",
         "file": "plugins/cordova-plugin-whitelist/whitelist.js",
-        "pluginId": "cordova-plugin-whitelist",
+        "id": "cordova-plugin-whitelist.whitelist",
         "runs": true
     },
     {
-        "id": "cordova-plugin-x-toast.Toast",
         "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
-        "pluginId": "cordova-plugin-x-toast",
+        "id": "cordova-plugin-x-toast.Toast",
         "clobbers": [
             "window.plugins.toast"
         ]
     },
     {
-        "id": "cordova-plugin-x-toast.tests",
         "file": "plugins/cordova-plugin-x-toast/test/tests.js",
-        "pluginId": "cordova-plugin-x-toast"
+        "id": "cordova-plugin-x-toast.tests"
     },
     {
-        "id": "cordova-sqlite-storage.SQLitePlugin",
         "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-        "pluginId": "cordova-sqlite-storage",
+        "id": "cordova-sqlite-storage.SQLitePlugin",
         "clobbers": [
             "SQLitePlugin"
         ]
     },
     {
-        "id": "ionic-plugin-keyboard.keyboard",
         "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
-        "pluginId": "ionic-plugin-keyboard",
+        "id": "ionic-plugin-keyboard.keyboard",
         "clobbers": [
             "cordova.plugins.Keyboard"
         ],
@@ -105,7 +85,6 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cn.com.chaochuang.startapp": "1.0.0",
     "cn.jpush.phonegap.JPushPlugin": "2.1.6",
     "cordova-plugin-console": "1.0.2",
     "cordova-plugin-datepicker": "0.9.3",
