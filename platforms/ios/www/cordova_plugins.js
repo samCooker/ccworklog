@@ -102,14 +102,6 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
-    },
-    {
-        "id": "cn.com.chaochuang.startapp.StartActivity",
-        "file": "plugins/cn.com.chaochuang.startapp/www/StartActivity.js",
-        "pluginId": "cn.com.chaochuang.startapp",
-        "clobbers": [
-            "window.plugins.startApp"
-        ]
     }
 ];
 module.exports.metadata = 
@@ -125,8 +117,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.1",
     "cordova-plugin-x-toast": "2.5.0",
     "cordova-sqlite-storage": "1.4.6",
-    "ionic-plugin-keyboard": "2.0.1",
-    "cn.com.chaochuang.startapp": "1.0.0"
+    "ionic-plugin-keyboard": "2.0.1"
 };
 // BOTTOM OF METADATA
 });
